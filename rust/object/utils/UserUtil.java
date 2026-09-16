@@ -2,66 +2,40 @@ package nano.spook1998.rust.object.utils;
 
 import java.util.ArrayList;
 import java.util.List;
-import nano.spook1998.rust.object.Clan;
-import nano.spook1998.rust.object.User;
+import nano.spook1998.rust.object.Structural;
 
-public class ClanUtil {
+public class StructuralUtil {
 
-    private static final List<Clan> CLANS = new ArrayList<>();
+    private static final List<Structural> STRUCTURES = new ArrayList<>();
 
-    private ClanUtil() {
+    private StructuralUtil() {
     }
 
-    public static Clan createClan(String name, String tag, User owner) {
-        if (name == null || tag == null || owner == null) {
-            return null;
+    public static void addStructural(Structural structural) {
+        if (structural != null && !STRUCTURES.contains(structural)) {
+            STRUCTURES.add(structural);
         }
-        if (getByName(name) != null || getByTag(tag) != null) {
-            return null;
-        }
-
-        Clan clan = new Clan(name, tag, owner);
-        CLANS.add(clan);
-        return clan;
     }
 
-    public static List<Clan> getClans() {
-        return CLANS;
+    public static void removeStructural(Structural structural) {
+        if (structural != null) {
+            STRUCTURES.remove(structural);
+        }
     }
 
-    public static Clan getByName(String name) {
-        if (name == null) {
+    public static List<Structural> getStructures() {
+        return STRUCTURES;
+    }
+
+    public static Structural getById(String id) {
+        if (id == null) {
             return null;
         }
-        for (Clan clan : CLANS) {
-            if (clan != null && clan.getName() != null && clan.getName().equalsIgnoreCase(name)) {
-                return clan;
+        for (Structural structural : STRUCTURES) {
+            if (structural != null && id.equals(structural.getId())) {
+                return structural;
             }
         }
         return null;
-    }
-
-    public static Clan getByTag(String tag) {
-        if (tag == null) {
-            return null;
-        }
-        for (Clan clan : CLANS) {
-            if (clan != null && clan.getTag() != null && clan.getTag().equalsIgnoreCase(tag)) {
-                return clan;
-            }
-        }
-        return null;
-    }
-
-    public static void addClan(Clan clan) {
-        if (clan != null && !CLANS.contains(clan)) {
-            CLANS.add(clan);
-        }
-    }
-
-    public static void removeClan(Clan clan) {
-        if (clan != null) {
-            CLANS.remove(clan);
-        }
     }
 }

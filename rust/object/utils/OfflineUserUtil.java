@@ -1,29 +1,9 @@
-package nano.spook1998.rust.object.utils;
+package nano.spook1998.rust.data;
 
-import java.util.ArrayList;
-import java.util.List;
-import nano.spook1998.rust.object.Structural;
+public final class i {
 
-public class StructuralUtil {
-
-    private static final List<Structural> STRUCTURES = new ArrayList<>();
-
-    private StructuralUtil() {
+    private i() {
     }
 
-    public static void addStructural(Structural structural) {
-        if (structural != null && !STRUCTURES.contains(structural)) {
-            STRUCTURES.add(structural);
-        }
-    }
-
-    public static void removeStructural(Structural structural) {
-        if (structural != null) {
-            STRUCTURES.remove(structural);
-        }
-    }
-
-    public static List<Structural> getStructures() {
-        return STRUCTURES;
-    }
+    public static final String DEFAULT_VERSION = "1.0";
 }

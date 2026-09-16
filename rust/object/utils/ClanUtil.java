@@ -1,44 +1,38 @@
-package nano.spook1998.rust.data.manager;
+package nano.spook1998.rust.object.utils;
 
-import java.util.HashMap;
-import java.util.Map;
-import nano.spook1998.rust.object.Structural;
+import nano.spook1998.rust.utils.type.DirectionType;
 
-public class StructuralManager {
+public class DirectionUtil {
 
-    private static final StructuralManager INSTANCE = new StructuralManager();
-
-    private final Map<String, Structural> structures = new HashMap<>();
-
-    private StructuralManager() {
+    private DirectionUtil() {
     }
 
-    public static StructuralManager getInstance() {
-        return INSTANCE;
-    }
-
-    public void load() {
-        structures.clear();
-    }
-
-    public void save() {
-    }
-
-    public Structural get(String id) {
-        return structures.get(id);
-    }
-
-    public void put(Structural structural) {
-        if (structural != null && structural.getId() != null) {
-            structures.put(structural.getId(), structural);
+    public static DirectionType fromString(String value) {
+        if (value == null) {
+            return DirectionType.UNKNOWN;
         }
-    }
-
-    public void remove(String id) {
-        structures.remove(id);
-    }
-
-    public Map<String, Structural> getStructures() {
-        return structures;
+        String normalized = value.trim().toUpperCase();
+        switch (normalized) {
+            case "N":
+            case "NORTH":
+                return DirectionType.NORTH;
+            case "S":
+            case "SOUTH":
+                return DirectionType.SOUTH;
+            case "E":
+            case "EAST":
+                return DirectionType.EAST;
+            case "W":
+            case "WEST":
+                return DirectionType.WEST;
+            case "U":
+            case "UP":
+                return DirectionType.UP;
+            case "D":
+            case "DOWN":
+                return DirectionType.DOWN;
+            default:
+                return DirectionType.UNKNOWN;
+        }
     }
 }

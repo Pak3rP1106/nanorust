@@ -1,87 +1,66 @@
 package nano.spook1998.rust.object;
 
-import org.bukkit.Location;
+import java.util.HashMap;
+import java.util.Map;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Score;
+import org.bukkit.scoreboard.Scoreboard;
 
-public class StoneGenerator {
+public class Scoreboard {
 
-    private String id;
-    private Location location;
-    private int health;
-    private int maxHealth;
-    private boolean active = true;
+    private final String id;
+    private final org.bukkit.scoreboard.Scoreboard scoreboard;
+    private final Objective objective;
+    private final Map<String, Integer> values = new HashMap<>();
 
-    public StoneGenerator() {
-    }
-
-    public StoneGenerator(String id, Location location, int maxHealth) {
+    public Scoreboard(String id, String title) {
         this.id = id;
-        this.location = location;
-        this.maxHealth = maxHealth;
-        this.health = maxHealth;
+        this.scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
+        this.objective = this.scoreboard.registerNewObjective(id, "dummy");
+        this.objective.setDisplayName(title == null ? "Rust" : title);
+        this.objective.setDisplaySlot(DisplaySlot.SIDEBAR);
     }
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public Objective getObjective() {
+        return objective;
     }
 
-    public Location getLocation() {
-        return location;
+    public Scoreboard getScoreboard() {
+        return this;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public org.bukkit.scoreboard.Scoreboard getHandle() {
+        return scoreboard;
     }
 
-    public int getHealth() {
-        return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
-        if (this.health <= 0) {
-            this.active = false;
-            this.health = 0;
-        } else if (this.health > this.maxHealth) {
-            this.health = this.maxHealth;
-        }
-    }
-
-    public int getMaxHealth() {
-        return maxHealth;
-    }
-
-    public void setMaxHealth(int maxHealth) {
-        this.maxHealth = maxHealth;
-        if (this.health > this.maxHealth) {
-            this.health = this.maxHealth;
-        }
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public void damage(int amount) {
-        if (amount <= 0) {
+    public void setLine(int slot, String text) {
+        if (text == null || text.length() > 48) {
             return;
         }
-        this.health = Math.max(0, this.health - amount);
-        this.active = this.health > 0;
+        String key = "line_" + slot;
+        values.put(key, slot);
+        Score score = objective.getScore(Bukkit.getOfflinePlayer(text));
+        score.setScore(slot);
     }
 
-    public void repair(int amount) {
-        if (amount <= 0) {
+    public void update(Player player) {
+        if (player == null) {
             return;
         }
-        this.health = Math.min(this.maxHealth, this.health + amount);
-        this.active = this.health > 0;
+        player.setScoreboard(scoreboard);
+    }
+
+    public void clear() {
+        values.clear();
+        for (String entry : scoreboard.getEntries()) {
+            scoreboard.resetScores(entry);
+        }
     }
 }
