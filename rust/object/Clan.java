@@ -1,135 +1,30 @@
-package nano.spook1998.rust.data;
+package nano.spook1998.rust.utils.type;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.inventory.ItemStack;
+public enum DirectionType {
+    NORTH(0),
+    SOUTH(1),
+    EAST(2),
+    WEST(3),
+    UP(4),
+    DOWN(5),
+    UNKNOWN(-1);
 
-public final class Settings {
+    private final int id;
 
-    public static Location CENTER_LOCATION = Bukkit.getWorlds().isEmpty() ? new Location(null, 0, 64, 0) : Bukkit.getWorlds().get(0).getSpawnLocation();
-
-    public static Map<String, String> MESSAGE = new HashMap<>();
-    public static Integer TIME_SAVE = 18000;
-    public static Integer DAMAGE_BY_TNT;
-    public static String PREFIX_OTHER;
-    public static Integer REGION_SIZE;
-    public static List<LivingEntity> LIVING_ENTITY = new ArrayList<>();
-    public static Integer REGION_DISTANCE;
-    public static Integer TREE_AMOUNT;
-    public static String WORDROBE_ONLINE;
-    public static String PREFIX_TEAM;
-    public static ItemStack WORDROBE;
-    public static Integer STRUCTURAL_DEFAULT_HEALTH;
-    public static Map<Integer, String> TABLIST_18 = new HashMap<>();
-    public static Integer TABLIST_PING;
-    public static String TABLIST_FOOTER;
-    public static Map<String, Integer> STRUCTURAL_HEALTH = new HashMap<>();
-    public static Integer AIR_DROP_MAX;
-    public static Integer AMOUNT_SCHEMATS;
-    public static String SCOREBOARD_TITLE;
-    public static Integer DAMAGE_TO_STRUCTURAL;
-    public static Integer POINTS_CLAN;
-    public static Integer SLOTS;
-    public static String WORDROBE_NAME;
-    public static Integer TAG_MAX;
-    public static ItemStack TO_SCHEMAT;
-    public static Integer WORDROBE_REMOVE_ALL;
-    public static Integer TIME_OPEN;
-    public static Integer WORDROBE_REMOVE;
-    public static ItemStack WORDROBE_PLAYER;
-    public static Long RAID_TIME_MAX;
-    public static List<String> SCHEMATS_TO_FIND = new ArrayList<>();
-    public static Map<String, List<ItemStack>> FIRST_COST = new HashMap<>();
-    public static String WORDROBE_OFFLINE;
-    public static Map<String, Material> STRUCTURAL_MATERIAL = new HashMap<>();
-    public static List<Material> DEFAULT_SCHEMATS = new ArrayList<>();
-    public static Integer DEFAULT_POINTS;
-    public static ItemStack STRUCTURAL_PLAN;
-    public static List<String> CLAN_INFO = new ArrayList<>();
-    public static Integer MAX_USER;
-    public static Long RAID_TIME_MIN;
-    public static Integer STONE_GENERATOR_HEALTH;
-    public static List<Material> ALLOWED_BREAK_AT_REGION = new ArrayList<>();
-    public static Integer STONE_GENERAOTR_REBUILD;
-    public static Integer TAG_MIN;
-    public static List<String> CLANS_COMMAND = new ArrayList<>();
-    public static Integer WORDROBE_ADD;
-    public static Map<Integer, ItemStack> WORDROBE_BUTTON = new HashMap<>();
-    public static List<Material> ALLOWED_BREAK = new ArrayList<>();
-    public static List<Material> ALLOWED_PLACE = new ArrayList<>();
-    public static Integer IRON_DOOR_TIME;
-    public static Integer AIR_DROP_MIN;
-    public static Boolean RAID;
-    public static Integer WORDROBE_DESTROY;
-    public static Integer NAME_MAX;
-    public static Integer MAP_SIZE;
-    public static String TABLIST_HEADER;
-    public static Integer NAME_MIN;
-    public static Map<String, List<ItemStack>> STRUCTURAL_UPGRADE_COST = new HashMap<>();
-    public static Integer VERSION;
-
-    static {
-        REGION_SIZE = 50;
-        REGION_DISTANCE = 110;
-        ALLOWED_BREAK = new ArrayList<>();
-        ALLOWED_PLACE = new ArrayList<>();
-        ALLOWED_BREAK_AT_REGION = new ArrayList<>();
-        WORDROBE_NAME = ChatColor.RED + "[Rust]";
-        WORDROBE_ONLINE = ChatColor.GREEN + "Online";
-        WORDROBE_OFFLINE = ChatColor.RED + "Offline";
-        STRUCTURAL_DEFAULT_HEALTH = 100;
-        STONE_GENERATOR_HEALTH = 200;
-        STONE_GENERAOTR_REBUILD = 40;
-        AMOUNT_SCHEMATS = 10;
-        MAP_SIZE = 1000;
-        DEFAULT_SCHEMATS = new ArrayList<>();
-        FIRST_COST = new HashMap<>();
-        DAMAGE_BY_TNT = 15;
-        DEFAULT_POINTS = 1000;
-        AIR_DROP_MIN = 1;
-        AIR_DROP_MAX = 5;
-        TIME_OPEN = 1200;
-        WORDROBE_ADD = 1;
-        WORDROBE_REMOVE = 1;
-        WORDROBE_REMOVE_ALL = 1;
-        WORDROBE_DESTROY = 1;
-        TAG_MIN = 2;
-        TAG_MAX = 8;
-        NAME_MIN = 3;
-        NAME_MAX = 16;
-        POINTS_CLAN = 1000;
-        IRON_DOOR_TIME = 5;
-        RAID = false;
-        RAID_TIME_MIN = 120L;
-        RAID_TIME_MAX = 300L;
-        TIME_SAVE = 18000;
-        TABLIST_18 = new HashMap<>();
-        STRUCTURAL_HEALTH = new HashMap<>();
-        STRUCTURAL_MATERIAL = new HashMap<>();
-        STRUCTURAL_UPGRADE_COST = new HashMap<>();
-        WORDROBE_BUTTON = new HashMap<>();
-        CLANS_COMMAND = new ArrayList<>();
-        CLAN_INFO = new ArrayList<>();
-        MESSAGE = new HashMap<>();
-        SCOREBOARD_TITLE = "NanoRust";
-        PREFIX_OTHER = "";
-        PREFIX_TEAM = "";
-        TABLIST_HEADER = "";
-        TABLIST_FOOTER = "";
-        TO_SCHEMAT = new ItemStack(Material.CHEST);
-        STRUCTURAL_PLAN = new ItemStack(Material.WOOD);
-        WORDROBE = new ItemStack(Material.CHEST);
-        WORDROBE_PLAYER = new ItemStack(Material.SKULL_ITEM);
+    DirectionType(int id) {
+        this.id = id;
     }
 
-    private Settings() {
+    public int getId() {
+        return id;
+    }
+
+    public static DirectionType fromId(int id) {
+        for (DirectionType type : values()) {
+            if (type.id == id) {
+                return type;
+            }
+        }
+        return UNKNOWN;
     }
 }

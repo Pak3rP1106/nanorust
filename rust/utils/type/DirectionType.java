@@ -1,131 +1,124 @@
-/*     */ package nano.spook1998.rust.utils.type;
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ public enum DirectionType
-/*     */ {
-/*     */   static
-/*     */   {
-/*  95 */     X = new DirectionType(ALLATORIxDEMO("\006"), 3);C = new DirectionType(ALLATORIxDEMO("\035"), 4);V = new DirectionType(ALLATORIxDEMO("\b"), 5); int 
-/*     */     
-/*     */ 
-/*     */ 
-/*     */ 
-/* 100 */       tmp102_101 = 1;tmp102_101; int tmp104_102 = tmp102_101;tmp104_102[0] = P; int tmp110_104 = tmp104_102;tmp110_104[1] = B; int tmp116_110 = tmp110_104;tmp116_110[2] = Z; int tmp122_116 = tmp116_110;tmp122_116[3] = X; int tmp128_122 = tmp122_116;tmp128_122[4] = C; int tmp134_128 = tmp128_122;tmp134_128[5] = V;
-/*     */   }
-/*     */   
-/*     */   public static String ALLATORIxDEMO(String a)
-/*     */   {
-/*     */     int tmp27_24 = a.length();
-/*     */     int tmp31_30 = 1;
-/*     */     tmp31_30;
-/*     */     int j;
-/*     */     int ? = tmp31_30;
-/*     */     int k = tmp27_24;
-/*     */     int tmp41_37 = (j = new char[tmp27_24] - 1);
-/*     */     tmp41_37;
-/*     */     int i = (0x2 ^ 0x5) << 4 ^ 0x1;
-/*     */     (5 << 4 ^ (0x2 ^ 0x5) << 1);
-/*     */     if (tmp41_37 >= 0)
-/*     */     {
-/*     */       int tmp51_50 = j;
-/*     */       j--;
-/*     */       ?[tmp51_50] = ((char)(a.charAt(tmp51_50) ^ i));
-/*     */       int tmp72_69 = (j--);
-/*     */       ?[tmp72_69] = ((char)(a.charAt(tmp72_69) ^ k));
-/*     */     }
-/*     */     return new String(?);
-/*     */   }
-/*     */ }
+package nano.spook1998.rust.data;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.inventory.ItemStack;
 
-/* Location:              C:\Users\User\Desktop\Otek\NanoRust.jar!\nano\spook1998\rust\utils\type\DirectionType.class
- * Java compiler version: 8 (52.0)
- * JD-Core Version:       0.7.1
- */
+public final class Settings {
+
+    public static Location CENTER_LOCATION = Bukkit.getWorlds().isEmpty() ? new Location(null, 0, 64, 0) : Bukkit.getWorlds().get(0).getSpawnLocation();
+
+    public static Map<String, String> MESSAGE = new HashMap<>();
+    public static Integer TIME_SAVE = 18000;
+    public static Integer DAMAGE_BY_TNT;
+    public static String PREFIX_OTHER;
+    public static Integer REGION_SIZE = 50;
+    public static List<LivingEntity> LIVING_ENTITY = new ArrayList<>();
+    public static Integer REGION_DISTANCE = 110;
+    public static Integer TREE_AMOUNT;
+    public static String WORDROBE_ONLINE;
+    public static String PREFIX_TEAM;
+    public static ItemStack WORDROBE;
+    public static Integer STRUCTURAL_DEFAULT_HEALTH = 100;
+    public static Map<Integer, String> TABLIST_18 = new HashMap<>();
+    public static Integer TABLIST_PING;
+    public static String TABLIST_FOOTER;
+    public static Map<String, Integer> STRUCTURAL_HEALTH = new HashMap<>();
+    public static Integer AIR_DROP_MAX;
+    public static Integer AMOUNT_SCHEMATS = 10;
+    public static String SCOREBOARD_TITLE = "NanoRust";
+    public static Integer DAMAGE_TO_STRUCTURAL;
+    public static Integer POINTS_CLAN = 1000;
+    public static Integer SLOTS;
+    public static String WORDROBE_NAME;
+    public static Integer TAG_MAX;
+    public static ItemStack TO_SCHEMAT;
+    public static Integer WORDROBE_REMOVE_ALL;
+    public static Integer TIME_OPEN;
+    public static Integer WORDROBE_REMOVE;
+    public static ItemStack WORDROBE_PLAYER;
+    public static Long RAID_TIME_MAX;
+    public static List<String> SCHEMATS_TO_FIND = new ArrayList<>();
+    public static Map<String, List<ItemStack>> FIRST_COST = new HashMap<>();
+    public static String WORDROBE_OFFLINE;
+    public static Map<String, Material> STRUCTURAL_MATERIAL = new HashMap<>();
+    public static List<Material> DEFAULT_SCHEMATS = new ArrayList<>();
+    public static Integer DEFAULT_POINTS = 1000;
+    public static ItemStack STRUCTURAL_PLAN;
+    public static List<String> CLAN_INFO = new ArrayList<>();
+    public static Integer MAX_USER;
+    public static Long RAID_TIME_MIN;
+    public static Integer STONE_GENERATOR_HEALTH = 200;
+    public static List<Material> ALLOWED_BREAK_AT_REGION = new ArrayList<>();
+    public static Integer STONE_GENERAOTR_REBUILD = 40;
+    public static Integer TAG_MIN = 2;
+    public static List<String> CLANS_COMMAND = new ArrayList<>();
+    public static Integer WORDROBE_ADD;
+    public static Map<Integer, ItemStack> WORDROBE_BUTTON = new HashMap<>();
+    public static List<Material> ALLOWED_BREAK = new ArrayList<>();
+    public static List<Material> ALLOWED_PLACE = new ArrayList<>();
+    public static Integer IRON_DOOR_TIME = 5;
+    public static Integer AIR_DROP_MIN;
+    public static Boolean RAID = false;
+    public static Integer WORDROBE_DESTROY;
+    public static Integer NAME_MAX;
+    public static Integer MAP_SIZE = 1000;
+    public static String TABLIST_HEADER;
+    public static Integer NAME_MIN;
+    public static Map<String, List<ItemStack>> STRUCTURAL_UPGRADE_COST = new HashMap<>();
+    public static Integer VERSION;
+
+    static {
+        WORDROBE_NAME = ChatColor.RED + "[Rust]";
+        WORDROBE_ONLINE = ChatColor.GREEN + "Online";
+        WORDROBE_OFFLINE = ChatColor.RED + "Offline";
+        DAMAGE_BY_TNT = 15;
+        AIR_DROP_MIN = 1;
+        AIR_DROP_MAX = 5;
+        TIME_OPEN = 1200;
+        WORDROBE_ADD = 1;
+        WORDROBE_REMOVE = 1;
+        WORDROBE_REMOVE_ALL = 1;
+        WORDROBE_DESTROY = 1;
+        TAG_MIN = 2;
+        TAG_MAX = 8;
+        NAME_MIN = 3;
+        NAME_MAX = 16;
+        IRON_DOOR_TIME = 5;
+        RAID_TIME_MIN = 120L;
+        RAID_TIME_MAX = 300L;
+        TABLIST_HEADER = "";
+        TABLIST_FOOTER = "";
+        PREFIX_OTHER = "";
+        PREFIX_TEAM = "";
+        TO_SCHEMAT = new ItemStack(Material.CHEST);
+        STRUCTURAL_PLAN = new ItemStack(Material.WOOD);
+        WORDROBE = new ItemStack(Material.CHEST);
+        WORDROBE_PLAYER = new ItemStack(Material.SKULL_ITEM);
+        STRUCTURAL_MATERIAL = new HashMap<>();
+        STRUCTURAL_HEALTH = new HashMap<>();
+        STRUCTURAL_UPGRADE_COST = new HashMap<>();
+        TABLIST_18 = new HashMap<>();
+        WORDROBE_BUTTON = new HashMap<>();
+        FIRST_COST = new HashMap<>();
+        MESSAGE = new HashMap<>();
+        CLANS_COMMAND = new ArrayList<>();
+        CLAN_INFO = new ArrayList<>();
+        SCHEMATS_TO_FIND = new ArrayList<>();
+        DEFAULT_SCHEMATS = new ArrayList<>();
+        ALLOWED_BREAK = new ArrayList<>();
+        ALLOWED_PLACE = new ArrayList<>();
+        ALLOWED_BREAK_AT_REGION = new ArrayList<>();
+    }
+
+    private Settings() {
+    }
+}

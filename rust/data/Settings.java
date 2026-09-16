@@ -1,142 +1,122 @@
-package nano.spook1998.rust.data;
+package nano.spook1998.rust.object;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import org.bukkit.configuration.InvalidConfigurationException;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.plugin.java.JavaPlugin;
 
-public final class Config {
+public class Clan {
 
-    private static final Map<String, RConfig> CONFIGS = new HashMap<>();
+    private String name;
+    private String tag;
+    private User owner;
+    private final List<User> members = new ArrayList<>();
+    private final List<User> inventory = new ArrayList<>();
+    private boolean pvp;
+    private int points;
 
-    public static boolean registerConfig(String configId, String fileName, JavaPlugin plugin) {
-        File file = new File(plugin.getDataFolder(), fileName);
-
-        if (!file.exists()) {
-            file.getParentFile().mkdirs();
-            try (InputStream input = plugin.getResource(fileName)) {
-                if (input != null) {
-                    Files.copy(input, file.toPath());
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-                return false;
-            }
+    public Clan(String name, String tag, User owner) {
+        this.name = name;
+        this.tag = tag;
+        this.owner = owner;
+        if (owner != null) {
+            this.members.add(owner);
+            owner.setClan(this);
         }
-
-        RConfig config = new RConfig(configId, file);
-        if (CONFIGS.containsKey(configId)) {
-            return false;
-        }
-
-        CONFIGS.put(configId, config);
-        return true;
+        this.points = 0;
+        this.pvp = false;
     }
 
-    public static boolean unregisterConfig(String configId) {
-        RConfig config = CONFIGS.remove(configId);
-        return config != null;
-    }
-
-    public static RConfig getConfig(String configId) {
-        return CONFIGS.get(configId);
-    }
-
-    public static boolean load(String configId) {
-        RConfig config = CONFIGS.get(configId);
-        if (config == null) {
-            return false;
+    public void addUser(User user) {
+        if (user != null && !members.contains(user)) {
+            members.add(user);
+            user.setClan(this);
         }
+    }
 
-        try {
-            config.load();
+    public void removeUser(User user) {
+        if (user != null) {
+            members.remove(user);
+        }
+    }
+
+    public boolean addToInv(User user) {
+        if (user != null && !inventory.contains(user)) {
+            inventory.add(user);
             return true;
-        } catch (InvalidConfigurationException | FileNotFoundException | IOException e) {
-            e.printStackTrace();
-            return false;
         }
+        return false;
     }
 
-    public static boolean save(String configId) {
-        RConfig config = CONFIGS.get(configId);
-        if (config == null) {
-            return false;
-        }
-
-        try {
-            config.save();
+    public boolean removeFromInv(User user) {
+        if (user != null && inventory.contains(user)) {
+            inventory.remove(user);
             return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
+        }
+        return false;
+    }
+
+    public boolean isInClan(User user) {
+        return user != null && members.contains(user);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public List<User> getUsers() {
+        return members;
+    }
+
+    public void setUsers(List<User> users) {
+        this.members.clear();
+        if (users != null) {
+            this.members.addAll(users);
         }
     }
 
-    public static boolean loadAll() {
-        boolean ok = true;
-        for (RConfig config : new ArrayList<>(CONFIGS.values())) {
-            try {
-                config.load();
-            } catch (InvalidConfigurationException | FileNotFoundException | IOException e) {
-                e.printStackTrace();
-                ok = false;
-            }
-        }
-        return ok;
+    public List<User> getInv() {
+        return inventory;
     }
 
-    public static boolean saveAll() {
-        boolean ok = true;
-        for (RConfig config : new ArrayList<>(CONFIGS.values())) {
-            try {
-                config.save();
-            } catch (IOException e) {
-                e.printStackTrace();
-                ok = false;
-            }
-        }
-        return ok;
-    }
-
-    public static void clear(String configId) {
-        RConfig config = CONFIGS.remove(configId);
-        if (config != null) {
-            config.getFile().delete();
+    public void setInv(List<User> inventory) {
+        this.inventory.clear();
+        if (inventory != null) {
+            this.inventory.addAll(inventory);
         }
     }
 
-    public static final class RConfig extends YamlConfiguration {
+    public int getPoints() {
+        return points;
+    }
 
-        private final String configId;
-        private final File file;
+    public void setPoints(int points) {
+        this.points = points;
+    }
 
-        private RConfig(String configId, File file) {
-            this.configId = configId;
-            this.file = file;
-        }
+    public boolean isPvP() {
+        return pvp;
+    }
 
-        public String getConfigId() {
-            return configId;
-        }
-
-        public File getFile() {
-            return file;
-        }
-
-        public void load() throws InvalidConfigurationException, FileNotFoundException, IOException {
-            super.load(file);
-        }
-
-        public void save() throws IOException {
-            super.save(file);
-        }
+    public void setPvP(boolean pvp) {
+        this.pvp = pvp;
     }
 }
