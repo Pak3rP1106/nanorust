@@ -1,11 +1,16 @@
-/*   */ package nano.spook1998.rust.listeners; import org.bukkit.event.Listener;
-/*   */ 
-/*   */ public class EntityExplodeEvent implements Listener { @org.bukkit.event.EventHandler
-/* 2 */   public void onExplode(org.bukkit.event.entity.EntityExplodeEvent a) { a.setCancelled(true); }
-/*   */ }
+package nano.spook1998.rust.listeners;
 
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityExplodeEvent;
 
-/* Location:              C:\Users\User\Desktop\Otek\NanoRust.jar!\nano\spook1998\rust\listeners\EntityExplodeEvent.class
- * Java compiler version: 8 (52.0)
- * JD-Core Version:       0.7.1
- */
+public class EntityExplodeEventListener implements Listener {
+
+    @EventHandler
+    public void onExplode(EntityExplodeEvent event) {
+        if (event == null) {
+            return;
+        }
+        // Placeholder logic: explosion protection handled elsewhere.
+    }
+}
