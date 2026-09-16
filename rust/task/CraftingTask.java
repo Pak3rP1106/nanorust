@@ -1,0 +1,16 @@
+package nano.spook1998.rust.task;
+
+import nano.spook1998.rust.utils.crafting.CraftingVersion;
+import org.bukkit.scheduler.BukkitRunnable;
+
+public class CraftingTask
+  extends BukkitRunnable
+{
+  public void run() {}
+}
+
+
+/* Location:              C:\Users\User\Desktop\Otek\NanoRust.jar!\nano\spook1998\rust\task\CraftingTask.class
+ * Java compiler version: 8 (52.0)
+ * JD-Core Version:       0.7.1
+ */
