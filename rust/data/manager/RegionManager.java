@@ -22,7 +22,6 @@ public class ClanManager {
     }
 
     public void save() {
-        // Simple in-memory storage placeholder.
     }
 
     public Clan get(String name) {

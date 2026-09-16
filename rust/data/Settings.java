@@ -1,122 +1,95 @@
 package nano.spook1998.rust.object;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.bukkit.Location;
+import org.bukkit.Material;
 
-public class Clan {
+public class Structural {
 
-    private String name;
-    private String tag;
-    private User owner;
-    private final List<User> members = new ArrayList<>();
-    private final List<User> inventory = new ArrayList<>();
-    private boolean pvp;
-    private int points;
+    private String id;
+    private String type;
+    private Location location;
+    private Material material;
+    private int health;
+    private int maxHealth;
+    private boolean active = true;
 
-    public Clan(String name, String tag, User owner) {
-        this.name = name;
-        this.tag = tag;
-        this.owner = owner;
-        if (owner != null) {
-            this.members.add(owner);
-            owner.setClan(this);
-        }
-        this.points = 0;
-        this.pvp = false;
+    public Structural() {
     }
 
-    public void addUser(User user) {
-        if (user != null && !members.contains(user)) {
-            members.add(user);
-            user.setClan(this);
-        }
+    public Structural(String id, String type, Location location, Material material, int maxHealth) {
+        this.id = id;
+        this.type = type;
+        this.location = location;
+        this.material = material;
+        this.maxHealth = maxHealth;
+        this.health = maxHealth;
     }
 
-    public void removeUser(User user) {
-        if (user != null) {
-            members.remove(user);
-        }
+    public String getId() {
+        return id;
     }
 
-    public boolean addToInv(User user) {
-        if (user != null && !inventory.contains(user)) {
-            inventory.add(user);
-            return true;
-        }
-        return false;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public boolean removeFromInv(User user) {
-        if (user != null && inventory.contains(user)) {
-            inventory.remove(user);
-            return true;
-        }
-        return false;
+    public String getType() {
+        return type;
     }
 
-    public boolean isInClan(User user) {
-        return user != null && members.contains(user);
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getName() {
-        return name;
+    public Location getLocation() {
+        return location;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
-    public String getTag() {
-        return tag;
+    public Material getMaterial() {
+        return material;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setMaterial(Material material) {
+        this.material = material;
     }
 
-    public User getOwner() {
-        return owner;
+    public int getHealth() {
+        return health;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public void setHealth(int health) {
+        this.health = health;
     }
 
-    public List<User> getUsers() {
-        return members;
+    public int getMaxHealth() {
+        return maxHealth;
     }
 
-    public void setUsers(List<User> users) {
-        this.members.clear();
-        if (users != null) {
-            this.members.addAll(users);
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public void damage(int amount) {
+        this.health = Math.max(0, this.health - amount);
+        if (this.health == 0) {
+            this.active = false;
         }
     }
 
-    public List<User> getInv() {
-        return inventory;
-    }
-
-    public void setInv(List<User> inventory) {
-        this.inventory.clear();
-        if (inventory != null) {
-            this.inventory.addAll(inventory);
-        }
-    }
-
-    public int getPoints() {
-        return points;
-    }
-
-    public void setPoints(int points) {
-        this.points = points;
-    }
-
-    public boolean isPvP() {
-        return pvp;
-    }
-
-    public void setPvP(boolean pvp) {
-        this.pvp = pvp;
+    public void repair(int amount) {
+        this.health = Math.min(maxHealth, this.health + amount);
+        this.active = this.health > 0;
     }
 }

@@ -24,7 +24,6 @@ public class UserManager {
     }
 
     public void save() {
-        // Simple in-memory storage placeholder.
     }
 
     public User get(UUID uuid) {

@@ -22,7 +22,6 @@ public class RegionManager {
     }
 
     public void save() {
-        // Simple in-memory storage placeholder.
     }
 
     public Region get(String id) {
