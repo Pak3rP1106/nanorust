@@ -1,58 +1,43 @@
 package nano.spook1998.rust.object;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.UUID;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
 
-public class Clan {
+public class User {
 
+    private UUID uuid;
     private String name;
-    private String tag;
-    private User owner;
-    private final List<User> members = new ArrayList<>();
-    private final List<User> inventory = new ArrayList<>();
-    private boolean pvp;
+    private Clan clan;
     private int points;
+    private boolean online;
+    private int kills;
+    private int deaths;
+    private int level;
+    private Location lastLocation;
+    private long lastSeen;
 
-    public Clan(String name, String tag, User owner) {
+    public User() {
+    }
+
+    public User(UUID uuid, String name) {
+        this.uuid = uuid;
         this.name = name;
-        this.tag = tag;
-        this.owner = owner;
-        this.members.add(owner);
         this.points = 0;
-        this.pvp = false;
+        this.online = false;
+        this.lastSeen = System.currentTimeMillis();
     }
 
-    public void addUser(User user) {
-        if (user != null && !members.contains(user)) {
-            members.add(user);
-            user.setClan(this);
-        }
+    public User(Player player) {
+        this(player.getUniqueId(), player.getName());
     }
 
-    public void removeUser(User user) {
-        if (user != null) {
-            members.remove(user);
-        }
+    public UUID getUuid() {
+        return uuid;
     }
 
-    public boolean addToInv(User user) {
-        if (user != null && !inventory.contains(user)) {
-            inventory.add(user);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean removeFromInv(User user) {
-        if (user != null && inventory.contains(user)) {
-            inventory.remove(user);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean isInClan(User user) {
-        return user != null && members.contains(user);
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 
     public String getName() {
@@ -63,42 +48,12 @@ public class Clan {
         this.name = name;
     }
 
-    public String getTag() {
-        return tag;
+    public Clan getClan() {
+        return clan;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
-    }
-
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
-
-    public List<User> getUsers() {
-        return members;
-    }
-
-    public void setUsers(List<User> users) {
-        this.members.clear();
-        if (users != null) {
-            this.members.addAll(users);
-        }
-    }
-
-    public List<User> getInv() {
-        return inventory;
-    }
-
-    public void setInv(List<User> inventory) {
-        this.inventory.clear();
-        if (inventory != null) {
-            this.inventory.addAll(inventory);
-        }
+    public void setClan(Clan clan) {
+        this.clan = clan;
     }
 
     public int getPoints() {
@@ -109,11 +64,51 @@ public class Clan {
         this.points = points;
     }
 
-    public boolean isPvP() {
-        return pvp;
+    public boolean isOnline() {
+        return online;
     }
 
-    public void setPvP(boolean pvp) {
-        this.pvp = pvp;
+    public void setOnline(boolean online) {
+        this.online = online;
+    }
+
+    public int getKills() {
+        return kills;
+    }
+
+    public void setKills(int kills) {
+        this.kills = kills;
+    }
+
+    public int getDeaths() {
+        return deaths;
+    }
+
+    public void setDeaths(int deaths) {
+        this.deaths = deaths;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public Location getLastLocation() {
+        return lastLocation;
+    }
+
+    public void setLastLocation(Location lastLocation) {
+        this.lastLocation = lastLocation;
+    }
+
+    public long getLastSeen() {
+        return lastSeen;
+    }
+
+    public void setLastSeen(long lastSeen) {
+        this.lastSeen = lastSeen;
     }
 }
