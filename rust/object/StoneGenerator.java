@@ -1,243 +1,68 @@
-/*     */ package nano.spook1998.rust.object;
-/*     */ 
-/*     */ import org.bukkit.block.Block;
-/*     */ 
-/*     */ public class StoneGenerator
-/*     */ {
-/*     */   private org.bukkit.Location M;
-/*     */   private Block b;
-/*     */   private Integer ALLATORIxDEMO;
-/*     */   
-/*     */   public void setHealth(Integer a)
-/*     */   {
-/*  13 */     a.ALLATORIxDEMO = a;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public org.bukkit.Location getLocation()
-/*     */   {
-/*  93 */     return a.M;
-/*     */   }
-/*     */   
-/*  96 */   public Integer getHealth() { return a.ALLATORIxDEMO; }
-/*     */   
-/*     */   public StoneGenerator(Block a)
-/*     */   {
-/*  41 */     
-/*     */     
-/*     */ 
-/*     */ 
-/*  45 */       a.b = a;
-/*     */     
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/* 150 */     a.M = a.getLocation();a.ALLATORIxDEMO = nano.spook1998.rust.data.Settings.STONE_GENERATOR_HEALTH;nano.spook1998.rust.object.utils.StoneGeneratorUtil.addStoneGenerator(a);
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public Block getBlock()
-/*     */   {
-/* 123 */     return a.b;
-/*     */   }
-/*     */ }
+package nano.spook1998.rust.object;
 
+import java.util.ArrayList;
+import java.util.List;
+import org.bukkit.Location;
 
-/* Location:              C:\Users\User\Desktop\Otek\NanoRust.jar!\nano\spook1998\rust\object\StoneGenerator.class
- * Java compiler version: 8 (52.0)
- * JD-Core Version:       0.7.1
- */
+public class Schemat {
+
+    private String id;
+    private String name;
+    private String worldName;
+    private final List<Location> blocks = new ArrayList<>();
+    private boolean enabled = true;
+
+    public Schemat() {
+    }
+
+    public Schemat(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getWorldName() {
+        return worldName;
+    }
+
+    public void setWorldName(String worldName) {
+        this.worldName = worldName;
+    }
+
+    public List<Location> getBlocks() {
+        return blocks;
+    }
+
+    public void addBlock(Location location) {
+        if (location != null && !blocks.contains(location)) {
+            blocks.add(location);
+        }
+    }
+
+    public void removeBlock(Location location) {
+        blocks.remove(location);
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+}
